@@ -1,0 +1,1 @@
+enum HeartbeatShape { circle, heart, shield }
