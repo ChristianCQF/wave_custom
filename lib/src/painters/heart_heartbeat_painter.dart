@@ -19,7 +19,7 @@ class HeartHeartbeatPainter extends BaseHeartbeatPainter {
     const double vbHalfWidth = 16.0;
     const double vbHalfHeight = 14.35;
     final double scale = radius / math.max(vbHalfWidth, vbHalfHeight);
-    final double roundness = props.waveCustom.heartTipRoundness ?? 2.6;
+    final double roundness = props.shapeMode.heartTipRoundness ?? 2.6;
 
     Offset tr(Offset p) =>
         Offset((p.dx - vbHalfWidth) * scale, (p.dy - vbHalfHeight) * scale);

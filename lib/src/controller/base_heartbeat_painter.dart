@@ -5,7 +5,7 @@ import '../widget/wave.dart';
 class CommonPainterProps {
   final bool isLoading;
   final bool isError;
-  final WaveCustom waveCustom;
+  final ShapeMode shapeMode;
   final double circleFillRatio;
   final double pulseProgress;
   final double endProgress;
@@ -24,7 +24,7 @@ class CommonPainterProps {
   const CommonPainterProps({
     required this.isLoading,
     required this.isError,
-    required this.waveCustom,
+    required this.shapeMode,
     required this.circleFillRatio,
     required this.pulseProgress,
     required this.endProgress,
@@ -108,8 +108,8 @@ abstract class BaseHeartbeatPainter extends CustomPainter {
 
     final double shadowOffsetX = 2.0;
     final double shadowOffsetY = props.strokeWidth;
-    final double scaledOffsetX = props.waveCustom.zigzagOffset.dx;
-    final double scaledOffsetY = props.waveCustom.zigzagOffset.dy;
+    final double scaledOffsetX = props.shapeMode.zigzagOffset.dx;
+    final double scaledOffsetY = props.shapeMode.zigzagOffset.dy;
 
     canvas.save();
     canvas.clipPath(shapePath);
@@ -139,11 +139,11 @@ abstract class BaseHeartbeatPainter extends CustomPainter {
 
   void _drawCheckStroke(Canvas canvas, double circleRadius, double drawT) {
     final Offset offset = Offset(
-      props.waveCustom.checkOffsetRatio.dx * circleRadius,
-      props.waveCustom.checkOffsetRatio.dy * circleRadius,
+      props.shapeMode.checkOffsetRatio.dx * circleRadius,
+      props.shapeMode.checkOffsetRatio.dy * circleRadius,
     );
     Offset scaled(Offset base) =>
-        (base * circleRadius * props.waveCustom.checkScale) + offset;
+        (base * circleRadius * props.shapeMode.checkScale) + offset;
 
     final Path checkPath = Path()
       ..moveTo(
@@ -178,11 +178,11 @@ abstract class BaseHeartbeatPainter extends CustomPainter {
 
   void _drawErrorStroke(Canvas canvas, double circleRadius, double drawT) {
     final Offset offset = Offset(
-      props.waveCustom.errorOffsetRatio.dx * circleRadius,
-      props.waveCustom.errorOffsetRatio.dy * circleRadius,
+      props.shapeMode.errorOffsetRatio.dx * circleRadius,
+      props.shapeMode.errorOffsetRatio.dy * circleRadius,
     );
     Offset scaled(Offset base) =>
-        (base * circleRadius * props.waveCustom.errorScale) + offset;
+        (base * circleRadius * props.shapeMode.errorScale) + offset;
 
     final Path errorPath = Path()
       ..moveTo(
@@ -258,12 +258,12 @@ abstract class BaseHeartbeatPainter extends CustomPainter {
     final Path path = Path();
     path.moveTo(
       rawVertices[0].dx * totalScale,
-      rawVertices[0].dy * totalScale * props.waveCustom.zigzagHeightScale,
+      rawVertices[0].dy * totalScale * props.shapeMode.zigzagHeightScale,
     );
     for (int i = 1; i < rawVertices.length; i++) {
       path.lineTo(
         rawVertices[i].dx * totalScale,
-        rawVertices[i].dy * totalScale * props.waveCustom.zigzagHeightScale,
+        rawVertices[i].dy * totalScale * props.shapeMode.zigzagHeightScale,
       );
     }
     return path;
@@ -273,7 +273,7 @@ abstract class BaseHeartbeatPainter extends CustomPainter {
   bool shouldRepaint(covariant BaseHeartbeatPainter oldDelegate) {
     return oldDelegate.props.isLoading != props.isLoading ||
         oldDelegate.props.isError != props.isError ||
-        oldDelegate.props.waveCustom != props.waveCustom ||
+        oldDelegate.props.shapeMode != props.shapeMode ||
         oldDelegate.props.circleFillRatio != props.circleFillRatio ||
         oldDelegate.props.pulseProgress != props.pulseProgress ||
         oldDelegate.props.endProgress != props.endProgress ||

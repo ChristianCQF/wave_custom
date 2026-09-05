@@ -138,7 +138,7 @@ class _HeartbeatWidgetState extends State<HeartbeatWidget>
     final commonProps = CommonPainterProps(
       isLoading: widget.isLoading,
       isError: widget.isError,
-      waveCustom: widget.shapeMode,
+      shapeMode: widget.shapeMode,
       circleFillRatio: widget.circleFillRatio,
       pulseProgress: _pulseController.value,
       endProgress: _endAnimationController.value,

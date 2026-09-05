@@ -4,6 +4,6 @@ export 'src/widget/wave.dart';
 
 /*
 git add .
-git commit -m "feat: Actualizacion de nombres shape"
+git commit -m "feat: Actualizacion de nombres shape 2"
 git push origin main
 */
