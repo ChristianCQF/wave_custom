@@ -12,7 +12,7 @@ class HeartbeatWidget extends StatefulWidget {
   final double size;
   final bool isLoading;
   final bool isError;
-  final WaveCustom waveCustom;
+  final ShapeMode shapeMode;
 
   final double circleFillRatio;
   final Color circleColor;
@@ -40,7 +40,7 @@ class HeartbeatWidget extends StatefulWidget {
     required this.size,
     required this.isLoading,
     this.isError = false,
-    required this.waveCustom,
+    required this.shapeMode,
     this.circleFillRatio = 1.0,
     required this.circleColor,
     required this.lineColor,
@@ -138,7 +138,7 @@ class _HeartbeatWidgetState extends State<HeartbeatWidget>
     final commonProps = CommonPainterProps(
       isLoading: widget.isLoading,
       isError: widget.isError,
-      waveCustom: widget.waveCustom,
+      waveCustom: widget.shapeMode,
       circleFillRatio: widget.circleFillRatio,
       pulseProgress: _pulseController.value,
       endProgress: _endAnimationController.value,
@@ -155,7 +155,7 @@ class _HeartbeatWidgetState extends State<HeartbeatWidget>
       errorColor: widget.errorColor ?? widget.lineColor,
     );
 
-    switch (widget.waveCustom.shape) {
+    switch (widget.shapeMode.shape) {
       case HeartbeatShape.circle:
         return CircleHeartbeatPainter(commonProps);
       case HeartbeatShape.heart:
